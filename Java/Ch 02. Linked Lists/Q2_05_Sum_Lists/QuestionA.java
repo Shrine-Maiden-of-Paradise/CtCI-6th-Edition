@@ -3,26 +3,40 @@ package Q2_05_Sum_Lists;
 
 import CtCILibrary.LinkedListNode;
 
+// this is the recursive answer
 public class QuestionA {
+	
+	// first call to the lists
 	private static LinkedListNode addLists(LinkedListNode l1, LinkedListNode l2) {
 		return addLists(l1, l2, 0);
 	}
 	
+	// the recursive function
 	private static LinkedListNode addLists(LinkedListNode l1, LinkedListNode l2, int carry) {
+		// checking if either lists are null and the carry is zero 
+		// before we add a new node
+		// adds a new list or null if it fails
 		if (l1 == null && l2 == null && carry == 0) {
              return null;
 		}
 		
+		// creates new node
 		LinkedListNode result = new LinkedListNode();
+		// starts off the value by adding the carry 
 		int value = carry;
+		
+		// adds the list node data if not null
 		if (l1 != null) {
 			value += l1.data;
 		}
 		if (l2 != null) {
 			value += l2.data;
 		}
+		// afterwards set the data to the new node by modding 10 to ensure it's not a carry
 		result.data = value % 10;
+		// if both nodes aren't null then continue adding with
 		if (l1 != null || l2 != null) {
+			// within the 
 			LinkedListNode more = addLists(l1 == null ? null : l1.next, 
 										   l2 == null ? null : l2.next, 
 										   value >= 10 ? 1 : 0);
